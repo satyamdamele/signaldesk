@@ -31,6 +31,7 @@ const priorityStyles = {
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedSignal, setSelectedSignal] = useState<(typeof signals)[number] | null>(null);
+  const [actionCreatedFor, setActionCreatedFor] = useState<string | null>(null,);
   return (
     <main className="min-h-screen bg-[#08090b] text-white">
       <div className="flex min-h-screen">
@@ -159,9 +160,11 @@ export default function Home() {
                   </h2>
                 </div>
 
-                <button className="text-sm text-zinc-500 hover:text-white">
+                <a
+                  href="/signals"
+                  className="text-sm text-zinc-500 hover:text-white">
                   View all →
-                </button>
+                </a>
               </div>
 
               <div className="mt-6 overflow-hidden rounded-xl border border-zinc-900">
@@ -257,8 +260,10 @@ export default function Home() {
                     Close
                   </button>
 
-                  <button className="rounded-lg bg-white px-4 py-2 text-sm font-medium text-black hover:bg-zinc-200">
-                    Create action
+                  <button
+                    onClick={() => setActionCreatedFor(selectedSignal?.title ?? null)}
+                    className="rounded-lg bg-white px-4 py-2 text-sm font-medium text-black hover:bg-zinc-200">
+                    {actionCreatedFor === selectedSignal?.title ? "Action created ✓"  : "Create action"}
                   </button>
                 </div>
               </div>
